@@ -1,1 +1,0 @@
-Some of the details of how RN's are consumed are wrong, and obviously I'm not using the same RN generator as the site, but whatever close enough
