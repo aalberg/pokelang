@@ -1,6 +1,6 @@
 # Pokelang Project
 
-A silly project to encode English in a hypothetical reversible Pikachu language.
+A silly project to encode English in hypothetical reversible Pokemon languages.
 
 "Translations" are not true translations, but are encodings of one language in
 another using intermediate Huffman trees.
