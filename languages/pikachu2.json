@@ -1,0 +1,8 @@
+{
+  "name": "pikachu2",
+  "symbols": ["pi", "pii", "ka", "kaa", "chu", "chuu", "Pi", "Pii", "Ka", "Kaa",
+              "Chu", "Chuu"],
+  "tree": [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1],
+  "drop_extra": false,
+  "case_sensitive": true
+}

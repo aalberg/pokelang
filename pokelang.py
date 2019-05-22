@@ -14,6 +14,7 @@ class HuffmanTree:
   def __init__(self):
     self.name = None
     self.drop_extra = False
+    self.case_sensitive = False
     self.root = None
     self.leaves = None
     self.symbol_tree = None
@@ -23,10 +24,12 @@ class HuffmanTree:
       return (False, "Failed initial validation")
 
     # Reconstruct a Huffman tree from the JSON data. Coding is described here:
-    # https://stackoverflow.com/questions/34602904/how-to-transmit-huffman-code-on-a-set-of-symbols-0-1-2-n-1-with-2n-1-nce
+    # https://stackoverflow.com/a/34603070
     self.name = data["name"]
     if "drop_extra" in data:
       self.drop_extra = data["drop_extra"]
+    if "case_sensitive" in data:
+      self.case_sensitive = data["case_sensitive"]
     self.leaves = {}
     self.root = HuffmanNode(None, None)
     active_nodes = [self.root]
@@ -38,7 +41,10 @@ class HuffmanTree:
           cur.children.append(HuffmanNode(cur, i))
         active_nodes.extend(reversed(cur.children))
       elif tree_bit == 1:
-        cur.symbol = data["symbols"][symbol_index]
+        symbol = data["symbols"][symbol_index]
+        if not self.case_sensitive:
+          symbol = symbol.lower()
+        cur.symbol = symbol
         self.leaves[cur.symbol] = cur
         symbol_index += 1
         if symbol_index > len(data["symbols"]):
@@ -65,6 +71,8 @@ class HuffmanTree:
     return "name" in data and "symbols" in data and "tree" in data
 
   def encodeWord(self, word):
+    if not self.case_sensitive:
+      word = word.lower()
     (status, result) = self.parseIntoSymbols(word)
     if not status:
       return (status, "\"{}\" cannot be encoded in language {}: {}" \
@@ -118,12 +126,13 @@ class HuffmanTree:
       else:
         return (False, "Encoding error: {} at index: {}".format(word[i], i))
 
-      #print(cur.__repr__())
       cur = cur.children[c]
       if cur.symbol != None:
         symbols.append(cur.symbol)
         cur = self.root
     if not self.drop_extra and cur != self.root:
+      # TODO: Do this bfs once after building the tree and store partial symbol
+      # decodings in each node, instead of doing it at the end of each word.
       horizon = deque([cur])
       done = False
       while not done:
@@ -253,7 +262,7 @@ def translateLangauges(text, from_tree, to_tree):
 
 def translateWord(word, from_tree, to_tree):
   kErrorTemplate = "\"{}\" could not be translated from {} to {}:"
-  (status, result) = from_tree.encodeWord(word.lower())
+  (status, result) = from_tree.encodeWord(word)
   encoded = result
   if not status:
     return (status, \
