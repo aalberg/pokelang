@@ -1,0 +1,7 @@
+{
+  "name": "seel",
+  "symbols": ["seel", "el", "Seel", "El"],
+  "tree": [0, 0, 1, 1, 0, 1, 1],
+  "drop_extra": false,
+  "case_sensitive": true
+}

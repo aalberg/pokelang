@@ -1,0 +1,7 @@
+{
+  "name": "bulbasaur",
+  "symbols": ["bul", "ba", "baa", "saur", "Bul", "Ba", "Baa", "Saur"],
+  "tree": [0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+  "drop_extra": false,
+  "case_sensitive": true
+}

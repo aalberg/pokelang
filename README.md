@@ -13,10 +13,8 @@ pokelang.py <from_language> <to_langauge> <infile> <outfile>
 
 ## Language specification
 
-Languages are specified by JSON files in [languages/](languages/). Three example
-languages are specified: [english](languages/english.json) and two versions of
-Pikachu: [pikachu](languages/pikachu.json) and
-[pikachu2](languages/pikachu2.json).
+Several example languages are specified by JSON files in
+[languages/](languages/).
 
 Languages are specified with three required attributes: `name`, `symbols`, and
 `tree`, and two optional ones: `drop_extra` and `case_sensitive`.
